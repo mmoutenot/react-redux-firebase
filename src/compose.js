@@ -121,7 +121,7 @@ export default (config, otherConfig) => next =>
         })
 
     const watchEvent = (type, path, queryParams) =>
-      queryActions.watchEvent(firebase, dispatch, { type, path, queryParams }, true)
+      queryActions.watchEvent(firebase, dispatch, { type, path, queryParams, isQuery: !!queryParams }, true)
 
     const unWatchEvent = (eventName, eventPath, queryId = undefined) =>
       queryActions.unWatchEvent(firebase, eventName, eventPath, queryId)

@@ -145,7 +145,7 @@ exports.default = function (config, otherConfig) {
       };
 
       var watchEvent = function watchEvent(type, path, queryParams) {
-        return _actions.queryActions.watchEvent(firebase, dispatch, { type: type, path: path, queryParams: queryParams }, true);
+        return _actions.queryActions.watchEvent(firebase, dispatch, { type: type, path: path, queryParams: queryParams, isQuery: !!queryParams }, true);
       };
 
       var unWatchEvent = function unWatchEvent(eventName, eventPath) {
