@@ -120,8 +120,8 @@ export default (config, otherConfig) => next =>
           return rootRef.child(path).set(value, onComplete)
         })
 
-    const watchEvent = (type, path) =>
-      queryActions.watchEvent(firebase, dispatch, { type, path }, true)
+    const watchEvent = (type, path, queryParams) =>
+      queryActions.watchEvent(firebase, dispatch, { type, path, queryParams }, true)
 
     const unWatchEvent = (eventName, eventPath, queryId = undefined) =>
       queryActions.unWatchEvent(firebase, eventName, eventPath, queryId)
