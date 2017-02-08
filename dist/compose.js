@@ -154,7 +154,8 @@ exports.default = function (config, otherConfig) {
       };
 
       var login = function login(credentials) {
-        return _actions.authActions.login(dispatch, firebase, credentials);
+        _actions.authActions.login(dispatch, firebase, credentials);
+        _actions.connectionActions.watchConnection(dispatch, firebase);
       };
 
       var logout = function logout() {
@@ -162,7 +163,8 @@ exports.default = function (config, otherConfig) {
       };
 
       var createUser = function createUser(credentials, profile) {
-        return _actions.authActions.createUser(dispatch, firebase, credentials, profile);
+        _actions.authActions.createUser(dispatch, firebase, credentials, profile);
+        _actions.connectionActions.watchConnection(dispatch, firebase);
       };
 
       var resetPassword = function resetPassword(credentials) {
@@ -193,6 +195,7 @@ exports.default = function (config, otherConfig) {
       };
 
       _actions.authActions.init(dispatch, firebase);
+      _actions.connectionActions.watchConnection(dispatch, firebase);
 
       store.firebase = firebase;
       firebaseInstance = Object.assign({}, firebase, firebase.helpers);

@@ -1,5 +1,5 @@
 import Firebase from 'firebase'
-import { authActions, queryActions, storageActions } from './actions'
+import { authActions, queryActions, storageActions, connectionActions } from './actions'
 let firebaseInstance
 
 /**
@@ -126,14 +126,18 @@ export default (config, otherConfig) => next =>
     const unWatchEvent = (eventName, eventPath, queryId = undefined) =>
       queryActions.unWatchEvent(firebase, eventName, eventPath, queryId)
 
-    const login = credentials =>
+    const login = credentials => {
       authActions.login(dispatch, firebase, credentials)
+      connectionActions.watchConnection(dispatch, firebase);
+    }
 
     const logout = () =>
       authActions.logout(dispatch, firebase)
 
-    const createUser = (credentials, profile) =>
+    const createUser = (credentials, profile) => {
       authActions.createUser(dispatch, firebase, credentials, profile)
+      connectionActions.watchConnection(dispatch, firebase);
+    }
 
     const resetPassword = (credentials) =>
       authActions.resetPassword(dispatch, firebase, credentials)
@@ -158,6 +162,7 @@ export default (config, otherConfig) => next =>
     }
 
     authActions.init(dispatch, firebase)
+    connectionActions.watchConnection(dispatch, firebase);
 
     store.firebase = firebase
     firebaseInstance = Object.assign({}, firebase, firebase.helpers)
