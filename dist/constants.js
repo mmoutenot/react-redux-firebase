@@ -26,7 +26,7 @@ var actionTypes = exports.actionTypes = {
   START: actionsPrefix + 'START',
   SET: actionsPrefix + 'SET',
   SET_PROFILE: actionsPrefix + 'SET_PROFILE',
-  SET_CONNECTED: prefix + 'SET_CONNECTED',
+  SET_CONNECTED: actionsPrefix + 'SET_CONNECTED',
   LOGIN: actionsPrefix + 'LOGIN',
   LOGOUT: actionsPrefix + 'LOGOUT',
   LOGIN_ERROR: actionsPrefix + 'LOGIN_ERROR',
