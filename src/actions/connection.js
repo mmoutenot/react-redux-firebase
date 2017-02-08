@@ -1,4 +1,4 @@
-import {SET_CONNECTED} from '../constants';
+import {actionTypes} from '../constants';
 
 /**
  * @description Remove listener from user profile
@@ -22,7 +22,7 @@ export const watchConnection = (dispatch, firebase) => {
     .ref(".info/connected")
     .on('value', snap => {
       dispatch({
-        type: SET_CONNECTED,
+        type: actionTypes.SET_CONNECTED,
         isConnected: snap.val()
       })
     })

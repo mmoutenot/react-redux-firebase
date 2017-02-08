@@ -27,7 +27,7 @@ var watchConnection = exports.watchConnection = function watchConnection(dispatc
   unWatchConnection(firebase);
   firebase._.connectionWatch = firebase.database().ref(".info/connected").on('value', function (snap) {
     dispatch({
-      type: _constants.SET_CONNECTED,
+      type: _constants.actionTypes.SET_CONNECTED,
       isConnected: snap.val()
     });
   });
