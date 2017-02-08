@@ -155,7 +155,7 @@ export const watchEvents = (firebase, dispatch, events) =>
  */
 export const unWatchEvents = (firebase, events) =>
     events.forEach(event =>
-      unWatchEvent(firebase, event.type, event.path)
+      event.type != 'once' ? unWatchEvent(firebase, event.type, event.path): null
     )
 
 export default { watchEvents, unWatchEvents }
