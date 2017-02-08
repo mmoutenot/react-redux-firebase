@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resetPassword = exports.createUser = exports.logout = exports.login = exports.createUserProfile = exports.watchUserProfile = exports.unWatchUserProfile = exports.init = exports.dispatchLogin = exports.dispatchUnauthorizedError = exports.dispatchLoginError = undefined;
+exports.getIsEmailVerified = exports.resetPassword = exports.createUser = exports.logout = exports.login = exports.createUserProfile = exports.watchUserProfile = exports.unWatchUserProfile = exports.init = exports.dispatchLogin = exports.dispatchUnauthorizedError = exports.dispatchLoginError = undefined;
 
 var _isFunction2 = require('lodash/isFunction');
 
@@ -331,6 +331,15 @@ var resetPassword = exports.resetPassword = function resetPassword(dispatch, fir
       }
       return Promise.reject(err);
     }
+  });
+};
+
+var getIsEmailVerified = exports.getIsEmailVerified = function getIsEmailVerified(dispatch, firebase) {
+  var currentUser = firebase.auth().currentUser;
+  currentUser.reload();
+  dispatch({
+    type: _constants.actionTypes.SET_IS_EMAIL_VERIFIED,
+    isEmailVerified: currentUser.emailVerified
   });
 };
 

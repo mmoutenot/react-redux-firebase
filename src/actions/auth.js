@@ -322,6 +322,15 @@ export const resetPassword = (dispatch, firebase, email) => {
     })
 }
 
+export const getIsEmailVerified = (dispatch, firebase) => {
+  const currentUser = firebase.auth().currentUser;
+  currentUser.reload();
+  dispatch({
+    type: actionTypes.SET_IS_EMAIL_VERIFIED,
+    isEmailVerified: currentUser.emailVerified,
+  });
+}
+
 export default {
   dispatchLoginError,
   dispatchUnauthorizedError,

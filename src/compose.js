@@ -142,6 +142,9 @@ export default (config, otherConfig) => next =>
     const resetPassword = (credentials) =>
       authActions.resetPassword(dispatch, firebase, credentials)
 
+    const getIsEmailVerified = () =>
+      authActions.getIsEmailVerified(dispatch, firebase)
+
     firebase.helpers = {
       ref: path => Firebase.database().ref(path),
       set,
@@ -156,6 +159,7 @@ export default (config, otherConfig) => next =>
       deleteFile,
       createUser,
       resetPassword,
+      getIsEmailVerified,
       watchEvent,
       unWatchEvent,
       storage: () => Firebase.storage()

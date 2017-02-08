@@ -171,6 +171,10 @@ exports.default = function (config, otherConfig) {
         return _actions.authActions.resetPassword(dispatch, firebase, credentials);
       };
 
+      var getIsEmailVerified = function getIsEmailVerified() {
+        return _actions.authActions.getIsEmailVerified(dispatch, firebase);
+      };
+
       firebase.helpers = {
         ref: function ref(path) {
           return _firebase2.default.database().ref(path);
@@ -187,6 +191,7 @@ exports.default = function (config, otherConfig) {
         deleteFile: deleteFile,
         createUser: createUser,
         resetPassword: resetPassword,
+        getIsEmailVerified: getIsEmailVerified,
         watchEvent: watchEvent,
         unWatchEvent: unWatchEvent,
         storage: function storage() {

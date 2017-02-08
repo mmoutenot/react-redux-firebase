@@ -4,6 +4,7 @@ import { actionTypes } from './constants'
 const {
   SET,
   SET_PROFILE,
+  SET_IS_EMAIL_VERIFIED,
   SET_CONNECTED,
   LOGIN,
   LOGOUT,
@@ -20,6 +21,7 @@ const emptyState = {
   profile: undefined,
   isConnected: undefined,
   isInitializing: undefined,
+  isEmailVerified: undefined,
   data: {}
 }
 
@@ -75,6 +77,7 @@ export default (state = initialState, action = {}) => {
         auth: null,
         authError: null,
         profile: null,
+        isEmailVerified: null,
         isLoading: false,
         isConnected: state.get('isConnected'),
         data: {}
@@ -83,6 +86,11 @@ export default (state = initialState, action = {}) => {
     case LOGIN:
       return state.setIn(['auth'], fromJS(action.auth))
                   .setIn(['authError'], null)
+                  .setIn(['isEmailVerified'], action.auth.emailVerified)
+
+    case SET_IS_EMAIL_VERIFIED:
+      return state.setIn(['isEmailVerified'], action.isEmailVerified)
+
 
     case LOGIN_ERROR:
       return state
