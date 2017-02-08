@@ -4,6 +4,7 @@ import { actionTypes } from './constants'
 const {
   SET,
   SET_PROFILE,
+  SET_CONNECTED,
   LOGIN,
   LOGOUT,
   LOGIN_ERROR,
@@ -17,6 +18,7 @@ const emptyState = {
   auth: undefined,
   authError: undefined,
   profile: undefined,
+  isConnected: undefined,
   isInitializing: undefined,
   data: {}
 }
@@ -64,12 +66,17 @@ export default (state = initialState, action = {}) => {
         ? state.setIn(['profile'], fromJS(profile))
         : state.deleteIn(['profile'])
 
+    case SET_CONNECTED:
+      const {isConnected} = action;
+      return state.setIn(['isConnected'], isConnected)
+
     case LOGOUT:
       return fromJS({
         auth: null,
         authError: null,
         profile: null,
         isLoading: false,
+        isConnected: state.get('isConnected'),
         data: {}
       })
 

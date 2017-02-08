@@ -12,6 +12,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var SET = _constants.actionTypes.SET,
     SET_PROFILE = _constants.actionTypes.SET_PROFILE,
+    SET_CONNECTED = _constants.actionTypes.SET_CONNECTED,
     LOGIN = _constants.actionTypes.LOGIN,
     LOGOUT = _constants.actionTypes.LOGOUT,
     LOGIN_ERROR = _constants.actionTypes.LOGIN_ERROR,
@@ -25,6 +26,7 @@ var emptyState = {
   auth: undefined,
   authError: undefined,
   profile: undefined,
+  isConnected: undefined,
   isInitializing: undefined,
   data: {}
 };
@@ -78,12 +80,18 @@ exports.default = function () {
 
       return profile !== undefined ? state.setIn(['profile'], (0, _immutable.fromJS)(profile)) : state.deleteIn(['profile']);
 
+    case SET_CONNECTED:
+      var isConnected = action.isConnected;
+
+      return state.setIn(['isConnected'], isConnected);
+
     case LOGOUT:
       return (0, _immutable.fromJS)({
         auth: null,
         authError: null,
         profile: null,
         isLoading: false,
+        isConnected: state.get('isConnected'),
         data: {}
       });
 
