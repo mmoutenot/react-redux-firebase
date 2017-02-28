@@ -127,16 +127,16 @@ export default (config, otherConfig) => next =>
       queryActions.unWatchEvent(firebase, eventName, eventPath, queryId)
 
     const login = credentials => {
-      authActions.login(dispatch, firebase, credentials)
       connectionActions.watchConnection(dispatch, firebase);
+      return authActions.login(dispatch, firebase, credentials)
     }
 
     const logout = () =>
       authActions.logout(dispatch, firebase)
 
     const createUser = (credentials, profile) => {
-      authActions.createUser(dispatch, firebase, credentials, profile)
       connectionActions.watchConnection(dispatch, firebase);
+      return authActions.createUser(dispatch, firebase, credentials, profile)
     }
 
     const resetPassword = (credentials) =>

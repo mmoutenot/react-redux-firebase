@@ -154,8 +154,8 @@ exports.default = function (config, otherConfig) {
       };
 
       var login = function login(credentials) {
-        _actions.authActions.login(dispatch, firebase, credentials);
         _actions.connectionActions.watchConnection(dispatch, firebase);
+        return _actions.authActions.login(dispatch, firebase, credentials);
       };
 
       var logout = function logout() {
@@ -163,8 +163,8 @@ exports.default = function (config, otherConfig) {
       };
 
       var createUser = function createUser(credentials, profile) {
-        _actions.authActions.createUser(dispatch, firebase, credentials, profile);
         _actions.connectionActions.watchConnection(dispatch, firebase);
+        return _actions.authActions.createUser(dispatch, firebase, credentials, profile);
       };
 
       var resetPassword = function resetPassword(credentials) {
