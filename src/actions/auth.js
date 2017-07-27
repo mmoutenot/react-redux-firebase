@@ -59,6 +59,7 @@ export const init = (dispatch, firebase) => {
 
   firebase.auth().onAuthStateChanged(authData => {
     if (!authData) {
+      dispatch({ type: AUTHENTICATION_INIT_FINISHED })
       return dispatch({ type: LOGOUT })
     }
 
@@ -74,8 +75,6 @@ export const init = (dispatch, firebase) => {
   })
 
   firebase.auth().currentUser
-
-  dispatch({ type: AUTHENTICATION_INIT_FINISHED })
 }
 
 /**
@@ -235,6 +234,8 @@ export const login = (dispatch, firebase, credentials) => {
         user,
         profileData
       )
+
+      dispatch({ type: AUTHENTICATION_INIT_FINISHED })
     })
     .catch(err => {
       dispatchLoginError(dispatch, err)
@@ -264,6 +265,7 @@ export const logout = (dispatch, firebase) => {
  */
 export const createUser = (dispatch, firebase, { email, password, signIn }, profile) => {
   dispatchLoginError(dispatch, null)
+  dispatch({ type: AUTHENTICATION_INIT_STARTED })
 
   if (!email || !password) {
     dispatchLoginError(dispatch, new Error('Email and Password are required to create user'))

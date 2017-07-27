@@ -80,6 +80,7 @@ export default (state = initialState, action = {}) => {
         isEmailVerified: null,
         isLoading: false,
         isConnected: state.get('isConnected'),
+        isInitializing: false,
         data: {}
       })
 
@@ -100,7 +101,6 @@ export default (state = initialState, action = {}) => {
 
     case AUTHENTICATION_INIT_STARTED:
       return initialState.setIn(['isInitializing'], true)
-    // return state.setIn(['isInitializing'], true) // throws state.setIn not a function error
 
     case AUTHENTICATION_INIT_FINISHED:
       return state.setIn(['isInitializing'], false)
