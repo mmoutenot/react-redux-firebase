@@ -281,8 +281,8 @@ var createUser = exports.createUser = function createUser(dispatch, firebase, _r
       password = _ref.password,
       signIn = _ref.signIn;
 
-  dispatchLoginError(dispatch, null);
   dispatch({ type: AUTHENTICATION_INIT_STARTED });
+  dispatchLoginError(dispatch, null);
 
   if (!email || !password) {
     dispatchLoginError(dispatch, new Error('Email and Password are required to create user'));

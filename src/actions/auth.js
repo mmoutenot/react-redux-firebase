@@ -264,8 +264,8 @@ export const logout = (dispatch, firebase) => {
  * @return {Promise}
  */
 export const createUser = (dispatch, firebase, { email, password, signIn }, profile) => {
-  dispatchLoginError(dispatch, null)
   dispatch({ type: AUTHENTICATION_INIT_STARTED })
+  dispatchLoginError(dispatch, null)
 
   if (!email || !password) {
     dispatchLoginError(dispatch, new Error('Email and Password are required to create user'))
