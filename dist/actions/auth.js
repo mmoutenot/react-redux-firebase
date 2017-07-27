@@ -91,6 +91,7 @@ var init = exports.init = function init(dispatch, firebase) {
 
   firebase.auth().onAuthStateChanged(function (authData) {
     if (!authData) {
+      dispatch({ type: AUTHENTICATION_INIT_FINISHED });
       return dispatch({ type: LOGOUT });
     }
 
@@ -106,8 +107,6 @@ var init = exports.init = function init(dispatch, firebase) {
   });
 
   firebase.auth().currentUser;
-
-  dispatch({ type: AUTHENTICATION_INIT_FINISHED });
 };
 
 /**
@@ -249,6 +248,8 @@ var login = exports.login = function login(dispatch, firebase, credentials) {
     });
 
     return createUserProfile(dispatch, firebase, user, profileData);
+
+    dispatch({ type: AUTHENTICATION_INIT_FINISHED });
   }).catch(function (err) {
     dispatchLoginError(dispatch, err);
     return Promise.reject(err);
@@ -281,6 +282,7 @@ var createUser = exports.createUser = function createUser(dispatch, firebase, _r
       signIn = _ref.signIn;
 
   dispatchLoginError(dispatch, null);
+  dispatch({ type: AUTHENTICATION_INIT_STARTED });
 
   if (!email || !password) {
     dispatchLoginError(dispatch, new Error('Email and Password are required to create user'));

@@ -95,6 +95,7 @@ exports.default = function () {
         isEmailVerified: null,
         isLoading: false,
         isConnected: state.get('isConnected'),
+        isInitializing: false,
         data: {}
       });
 
@@ -109,7 +110,6 @@ exports.default = function () {
 
     case AUTHENTICATION_INIT_STARTED:
       return initialState.setIn(['isInitializing'], true);
-    // return state.setIn(['isInitializing'], true) // throws state.setIn not a function error
 
     case AUTHENTICATION_INIT_FINISHED:
       return state.setIn(['isInitializing'], false);
