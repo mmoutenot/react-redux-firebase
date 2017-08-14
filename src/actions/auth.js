@@ -188,7 +188,10 @@ export const login = (dispatch, firebase, credentials) => {
       if (!userData) return Promise.resolve(null)
 
       // For email auth return uid (createUser is used for creating a profile)
-      if (userData.email) return userData.uid
+      if (userData.email) {
+        dispatch({ type: AUTHENTICATION_INIT_FINISHED })
+        return userData.uid;
+      }
 
       const { profileDecorator } = firebase._.config
 
