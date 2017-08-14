@@ -247,9 +247,9 @@ var login = exports.login = function login(dispatch, firebase, credentials) {
       providerData: user.providerData
     });
 
-    return createUserProfile(dispatch, firebase, user, profileData);
-
     dispatch({ type: AUTHENTICATION_INIT_FINISHED });
+
+    return createUserProfile(dispatch, firebase, user, profileData);
   }).catch(function (err) {
     dispatchLoginError(dispatch, err);
     return Promise.reject(err);

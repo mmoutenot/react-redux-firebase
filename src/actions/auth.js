@@ -228,14 +228,14 @@ export const login = (dispatch, firebase, credentials) => {
           }
         )
 
+      dispatch({ type: AUTHENTICATION_INIT_FINISHED })
+
       return createUserProfile(
         dispatch,
         firebase,
         user,
         profileData
       )
-
-      dispatch({ type: AUTHENTICATION_INIT_FINISHED })
     })
     .catch(err => {
       dispatchLoginError(dispatch, err)
