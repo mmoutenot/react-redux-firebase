@@ -114,6 +114,7 @@ export const watchUserProfile = (dispatch, firebase) => {
             type: SET_PROFILE,
             profile: snap.val()
           })
+          dispatch({ type: AUTHENTICATION_INIT_FINISHED })
         } else {
           // Convert each populate string in array into an array of once query promises
           Promise.all(
@@ -128,6 +129,7 @@ export const watchUserProfile = (dispatch, firebase) => {
                 data.reduce((a, b) => Object.assign(a, b)) // populated profile parameters
               )
             })
+            dispatch({ type: AUTHENTICATION_INIT_FINISHED })
           })
         }
       })
@@ -189,7 +191,6 @@ export const login = (dispatch, firebase, credentials) => {
 
       // For email auth return uid (createUser is used for creating a profile)
       if (userData.email) {
-        dispatch({ type: AUTHENTICATION_INIT_FINISHED })
         return userData.uid;
       }
 

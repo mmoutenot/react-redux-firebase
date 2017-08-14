@@ -141,6 +141,7 @@ var watchUserProfile = exports.watchUserProfile = function watchUserProfile(disp
           type: SET_PROFILE,
           profile: snap.val()
         });
+        dispatch({ type: AUTHENTICATION_INIT_FINISHED });
       } else {
         // Convert each populate string in array into an array of once query promises
         Promise.all((0, _populate.promisesForPopulate)(firebase, snap.val(), profileParamsToPopulate)).then(function (data) {
@@ -153,6 +154,7 @@ var watchUserProfile = exports.watchUserProfile = function watchUserProfile(disp
             }) // populated profile parameters
             )
           });
+          dispatch({ type: AUTHENTICATION_INIT_FINISHED });
         });
       }
     });
@@ -215,7 +217,6 @@ var login = exports.login = function login(dispatch, firebase, credentials) {
 
     // For email auth return uid (createUser is used for creating a profile)
     if (userData.email) {
-      dispatch({ type: AUTHENTICATION_INIT_FINISHED });
       return userData.uid;
     }
 
